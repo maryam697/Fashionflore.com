@@ -52,51 +52,42 @@
                     <li class="nav-item"><a class="nav-link" href="#products">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#upload">Upload</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero-section">
         <h1>Style Meets Comfort</h1>
+    </section>
+    
+    <!-- Upload Background Section -->
+    <section id="upload-background" class="container my-5 text-center">
+        <h2>Upload Background Image (Admin Only)</h2>
+        <input type="file" id="background-upload" accept="image/*">
+        <button onclick="updateBackground()" class="btn btn-dark">Upload Background</button>
     </section>
     
     <!-- Products Section -->
     <section id="products" class="container my-5">
         <h2 class="text-center mb-4">Our Latest Collection</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card product-card">
-                    <img src="tracksuit.jpg" class="card-img-top" alt="Tracksuit">
-                    <div class="card-body">
-                        <h5 class="card-title">Stylish Tracksuit</h5>
-                        <p class="card-text">Premium quality, perfect fit.</p>
-                        <button class="btn btn-dark">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card product-card">
-                    <img src="menswear.jpg" class="card-img-top" alt="Men's Clothing">
-                    <div class="card-body">
-                        <h5 class="card-title">Men's Casual Wear</h5>
-                        <p class="card-text">Perfect for daily wear.</p>
-                        <button class="btn btn-dark">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card product-card">
-                    <img src="formal.jpg" class="card-img-top" alt="Formal Wear">
-                    <div class="card-body">
-                        <h5 class="card-title">Elegant Formal Wear</h5>
-                        <p class="card-text">Look sharp and professional.</p>
-                        <button class="btn btn-dark">Buy Now</button>
-                    </div>
-                </div>
-            </div>
+        <div class="row" id="product-list">
+            <!-- Products will be dynamically added here -->
         </div>
+    </section>
+    
+    <!-- Upload Section -->
+    <section id="upload" class="container my-5">
+        <h2 class="text-center">Upload Product (Admin Only)</h2>
+        <form id="upload-form" class="text-center">
+            <label for="product-name">Product Name:</label>
+            <input type="text" id="product-name" required>
+            <label for="product-image">Upload Image:</label>
+            <input type="file" id="product-image" required>
+            <button type="submit" class="btn btn-dark">Upload</button>
+        </form>
     </section>
     
     <!-- About Section -->
@@ -117,5 +108,23 @@
     </footer>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Product uploaded successfully! (Functionality needs backend implementation)');
+        });
+        
+        function updateBackground() {
+            const input = document.getElementById('background-upload');
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('hero-section').style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 </body>
 </html>
+
